@@ -1,4 +1,3 @@
-%%writefile app.py
 import streamlit as st
 import pandas as pd
 import plotly.express as px
@@ -56,7 +55,10 @@ if uploaded_file is not None:
         
         st.subheader("Missing Values")
         missing = df.isnull().sum()
-        st.dataframe(missing[missing > 0])
+        if missing.sum() > 0:
+            st.dataframe(missing[missing > 0])
+        else:
+            st.info("No missing values!")
 
 else:
     st.info("👆 Upload a CSV file to begin exploration")
